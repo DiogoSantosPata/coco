@@ -46,6 +46,21 @@ class Trace:
          for ii in range(len(self.values)):
              toOutput[ii,:] = self.values[ii][whichData]
          plt.clf()
+         
+         #########################################							
+         plt.subplot(2,1,1)  # Top plot is a raster									
+         for ith, cell in enumerate( whichData   ):
+              plt.vlines(cell, ith + .5, ith + 1.5, color='k')
+              plt.ylim(.5, len(whichData) + .5)
+         plt.title('Raster plot')
+         plt.ylabel('Cell')		
+         
+         plt.subplot(2,1,2)# Bottom hist
+         plt.hist(whichData)#, np.arange(0, len(time)))
+         plt.xlabel('Time')
+         plt.show()
+         #########################################	
+						
          #fig1 = plt.figure()
          plt.ion()
          for ii in range(len(whichData)):
