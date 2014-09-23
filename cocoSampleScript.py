@@ -15,17 +15,17 @@ reload(ctt)
 
 traj1 = ctt.Trajectory()
 traj1.build()
-#traj1.plot()
+traj1.plot()
 
 # WILL CREATE AN OCCUPATION MAP
 
-import cocoRateMap as crm
+#import cocoRateMap as crm
 
-reload(crm)
+#reload(crm)
 
-ratemap1 = crm.RateMap((1,20,20),[0,100,0,100])
-ratemap1.buildOccMap(traj1)
-ratemap1.plotOccMap()
+#ratemap1 = crm.RateMap((1,20,20),[0,100,0,100])
+#ratemap1.buildOccMap(traj1)
+#ratemap1.plotOccMap()
 
 
 # WILL CREATE SOME NEURONS AND PLOT THEM
