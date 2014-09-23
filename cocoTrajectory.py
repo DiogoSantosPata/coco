@@ -67,15 +67,7 @@ class Trajectory:
         angle = np.interp(givenTimes,self.time,self.angle)
         position = xxx + 1j*yyy
         return position, angle
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+    '''
     def plot(self):
         plt.clf()
         plt.plot(np.real(self.position),np.imag(self.position), '-')
@@ -84,24 +76,9 @@ class Trajectory:
         plt.title('Trajectory')
         plt.xlabel('X')
         plt.ylabel('Y')									
-=======
-=======
->>>>>>> FETCH_HEAD
-=======
->>>>>>> FETCH_HEAD
-=======
->>>>>>> FETCH_HEAD
-=======
->>>>>>> FETCH_HEAD
-=======
->>>>>>> FETCH_HEAD
-    def plot(self,axis=[]):
-=======
+    '''
+
     def plot(self,axis=[]):        
->>>>>>> FETCH_HEAD
-=======
-    def plot(self,axis=[]):        
->>>>>>> FETCH_HEAD
         if(str(type(axis)) != "<class 'matplotlib.axes.AxesSubplot'>"):
             fg = plt.gcf()
             fg.clf()
@@ -113,28 +90,6 @@ class Trajectory:
         axis.ylabel('y')
         axis.title('Trajectory')
         fg.canvas.draw()
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> FETCH_HEAD
-=======
->>>>>>> FETCH_HEAD
-=======
->>>>>>> FETCH_HEAD
-=======
->>>>>>> FETCH_HEAD
-=======
->>>>>>> FETCH_HEAD
-=======
->>>>>>> FETCH_HEAD
-=======
->>>>>>> FETCH_HEAD
-=======
->>>>>>> FETCH_HEAD
         plt.show()
         
         
