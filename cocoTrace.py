@@ -149,4 +149,8 @@ class SpikeTrace (Trace):
      
      def plot(self):
          pass
+<<<<<<< HEAD
      # raster plot
+=======
+     # raster plot
+>>>>>>> FETCH_HEAD

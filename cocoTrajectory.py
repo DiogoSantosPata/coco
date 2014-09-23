@@ -75,6 +75,7 @@ class Trajectory:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     def plot(self):
         plt.clf()
         plt.plot(np.real(self.position),np.imag(self.position), '-')
@@ -98,6 +99,9 @@ class Trajectory:
 =======
     def plot(self,axis=[]):        
 >>>>>>> FETCH_HEAD
+=======
+    def plot(self,axis=[]):        
+>>>>>>> FETCH_HEAD
         if(str(type(axis)) != "<class 'matplotlib.axes.AxesSubplot'>"):
             fg = plt.gcf()
             fg.clf()
@@ -115,6 +119,9 @@ class Trajectory:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> FETCH_HEAD
+=======
 >>>>>>> FETCH_HEAD
 =======
 >>>>>>> FETCH_HEAD

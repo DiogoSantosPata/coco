@@ -20,6 +20,7 @@ reload(ctt)
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 traj = ctt.Trajectory()
 traj.build()
 traj.plot()
@@ -85,6 +86,28 @@ ratemap2.buildAbstractLEC(10,1)
 >>>>>>> FETCH_HEAD
 
 
+=======
+traj1 = ctt.Trajectory()
+traj1.build()
+traj1.plot()
+
+# WILL CREATE AN OCCUPATION MAP
+
+import cocoRateMap as crm
+
+reload(crm)
+
+ratemap1 = crm.RateMap((10,20,20),[0,100,0,100])
+ratemap1.buildOccMap(traj1)
+ratemap1.plotOccMap()
+
+# WILL CREATE A LEC POPULATION
+
+ratemap2 = crm.RateMap((10,100,100),[0,100,0,100])
+ratemap2.buildAbstractLEC(10,1)
+
+
+>>>>>>> FETCH_HEAD
 # WILL CREATE SOME NEURONS AND PLOT THEM
 
 #import cocoNeuronPopulation as cn
