@@ -12,17 +12,20 @@ import pickle
 class Trajectory:
     
     def __init__(self,fileName=[]):
+        self.type = 'Trajectory'
         if type(fileName) is str:
             self.load(fileName)
         else:
             self.position = []
             self.angle = []
             self.time = []
+            self.range = [0,100,0,100]
     
     def build(self,trajLenght=600,sampleRate=10,arenaRange=[0,100,0,100],noise=[1,0.1]):
     
+        self.range = arenaRange
         rangee = trajLenght * sampleRate
-        steep = 1/sampleRate
+        steep = 1/float(sampleRate)
         safeRange = 2        
         
         speedNoise = noise[0]
@@ -58,7 +61,6 @@ class Trajectory:
             if(speedNoise > 0 and angleNoise>0):            
                 self.position[ii] = self.position[ii] + np.random.normal(0,speedNoise)*np.exp(1j*np.random.normal(0,angleNoise))
 
-
     def interpolate(self,givenTimes):
         xxx = np.interp(givenTimes,self.time,np.real(self.position))        
         yyy = np.interp(givenTimes,self.time,np.imag(self.position))        
@@ -66,20 +68,80 @@ class Trajectory:
         position = xxx + 1j*yyy
         return position, angle
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
     def plot(self):
         plt.clf()
         plt.plot(np.real(self.position),np.imag(self.position), '-')
+        plt.xlim( min(np.real(self.position)) , max(np.real(self.position))   )
+        plt.ylim( min(np.imag(self.position)) , max(np.imag(self.position))   )
+        plt.title('Trajectory')
+        plt.xlabel('X')
+        plt.ylabel('Y')									
+=======
+=======
+>>>>>>> FETCH_HEAD
+=======
+>>>>>>> FETCH_HEAD
+=======
+>>>>>>> FETCH_HEAD
+=======
+>>>>>>> FETCH_HEAD
+=======
+>>>>>>> FETCH_HEAD
+    def plot(self,axis=[]):
+=======
+    def plot(self,axis=[]):        
+>>>>>>> FETCH_HEAD
+        if(str(type(axis)) != "<class 'matplotlib.axes.AxesSubplot'>"):
+            fg = plt.gcf()
+            fg.clf()
+            axis = plt.subplot(1,1,1)        
+        axis.plot(np.real(self.position),np.imag(self.position),'k-')
+        axis.set_xlim([self.range[0],self.range[1]])
+        axis.set_ylim([self.range[2],self.range[3]])
+        axis.xlabel('x')
+        axis.ylabel('y')
+        axis.title('Trajectory')
+        fg.canvas.draw()
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> FETCH_HEAD
+=======
+>>>>>>> FETCH_HEAD
+=======
+>>>>>>> FETCH_HEAD
+=======
+>>>>>>> FETCH_HEAD
+=======
+>>>>>>> FETCH_HEAD
+=======
+>>>>>>> FETCH_HEAD
+=======
+>>>>>>> FETCH_HEAD
         plt.show()
+        
+        
 
     def save(self,fileName):
         position = self.position
         angle = self.angle
         time = self.time
+        trange = self.range
         with open(fileName, 'w') as ff:
-            pickle.dump([position, angle, time], ff)
+            pickle.dump([position, angle, time, trange], ff)
             
     def load(self,fileName):
         with open(fileName, 'r') as ff:
-            self.position, self.angle, self.time = pickle.load(ff)
+            self.position, self.angle, self.time, self.range = pickle.load(ff)
 
    
