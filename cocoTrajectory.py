@@ -12,6 +12,7 @@ import pickle
 class Trajectory:
     
     def __init__(self,fileName=[]):
+        self.type = 'Trajectory'
         if type(fileName) is str:
             self.load(fileName)
         else:
@@ -22,7 +23,7 @@ class Trajectory:
     def build(self,trajLenght=600,sampleRate=10,arenaRange=[0,100,0,100],noise=[1,0.1]):
     
         rangee = trajLenght * sampleRate
-        steep = 1/sampleRate
+        steep = 1/float(sampleRate)
         safeRange = 2        
         
         speedNoise = noise[0]

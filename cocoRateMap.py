@@ -11,17 +11,50 @@ import scipy.ndimage
 import pickle
 from scipy.interpolate import griddata
 
+import cocoFunctions as cf
+
 class RateMap:
+        
     def __init__(self,topology,mapRange=[0,1,0,1]):
         self.mapRange = mapRange        
         self.topology = topology
         self.values = np.zeros(topology)
+        self.occ = []
         
     def buildOccMap(self,trajectory):
-        pass
+        self.occ = cf.cocoOccMap(trajectory.position,self.mapRange,(self.topology[1],self.topology[2]),trajectory.time[2]-trajectory.time[1])
     
-    def buildRateMap(self,trajectory,activityTrace):
+    def buildRateMap(self,trajectory,Trace):
+        self.buildOccMap(trajectory)
+        if Trace.type is 'SpikeTrace':
+            self.buildRateMapFromSpike(trajectory,Trace)
+        else: 
+            if Trace.type is 'ActivityTrace':
+                self.buildRateMapFromActivity(trajectory,Trace)
+
+    def buildRateMapFromSpike(self,trajectory,SpikeTrace):
         pass
+        #get spike times
+        # get positions in the spike times
+        # get the occ map with spikes
+        # divide um pelo outro
+    
+    def buildRateMapFromActivity(self,trajectory,ActivityTrace):
+        SIGMA2 = 10
+        xxx = np.linspace(self.mapRange[0],self.mapRange[1],self.topology[1])        
+        yyy = np.linspace(self.mapRange[2],self.mapRange[3],self.topology[2])
+        xxx,yyy = np.meshgrid(xxx,yyy)
+        ttt = np.ravel(xxx)+1j*np.ravel(yyy)
+        xxx,yyy = np.meshgrid(range(len(ttt)),range(len(trajectory.time)))
+        xxx = np.ravel(xxx)
+        yyy = np.ravel(yyy)        
+        ddd = abs(ttt[xxx]-trajectory.position[yyy])
+        sss = ActivityTrace.output([])
+        for ii in range(sss.shape[0]):
+            saa = np.ravel(sss[ii,:])
+            self.ratemap[ii] = np.sum(np.exp(-1*ddd/SIGMA2)*saa[yyy])
+            self.ratemap[ii].reshape((self.topology[1],self.topology[2]))
+            self.ratemap[ii] /= self.occ
 
     def save(self,fileName):
         mapRange = self.mapRange        
@@ -37,6 +70,11 @@ class RateMap:
     def plot(self,cellNumber):
         plt.ion()
         plt.pcolormesh(self.values[cellNumber,:,:])
+        plt.show()
+        
+    def plotOccMap(self):
+        plt.ion()
+        plt.pcolormesh(self.occ)
         plt.show()
 
     def interpolate(self,position,cells=[]):
