@@ -19,13 +19,18 @@ traj1.plot()
 
 # WILL CREATE AN OCCUPATION MAP
 
-#import cocoRateMap as crm
+import cocoRateMap as crm
 
-#reload(crm)
+reload(crm)
 
-#ratemap1 = crm.RateMap((1,20,20),[0,100,0,100])
-#ratemap1.buildOccMap(traj1)
-#ratemap1.plotOccMap()
+ratemap1 = crm.RateMap((10,20,20),[0,100,0,100])
+ratemap1.buildOccMap(traj1)
+ratemap1.plotOccMap()
+
+# WILL CREATE A LEC POPULATION
+
+ratemap2 = crm.RateMap((10,100,100),[0,100,0,100])
+ratemap2.buildAbstractLEC(10,1)
 
 
 # WILL CREATE SOME NEURONS AND PLOT THEM

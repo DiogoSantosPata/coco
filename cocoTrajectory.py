@@ -61,7 +61,6 @@ class Trajectory:
             if(speedNoise > 0 and angleNoise>0):            
                 self.position[ii] = self.position[ii] + np.random.normal(0,speedNoise)*np.exp(1j*np.random.normal(0,angleNoise))
 
-
     def interpolate(self,givenTimes):
         xxx = np.interp(givenTimes,self.time,np.real(self.position))        
         yyy = np.interp(givenTimes,self.time,np.imag(self.position))        
@@ -69,7 +68,7 @@ class Trajectory:
         position = xxx + 1j*yyy
         return position, angle
 
-    def plot(self,axis=[]):
+    def plot(self,axis=[]):        
         if(str(type(axis)) != "<class 'matplotlib.axes.AxesSubplot'>"):
             fg = plt.gcf()
             fg.clf()
@@ -82,8 +81,6 @@ class Trajectory:
         axis.title('Trajectory')
         fg.canvas.draw()
         plt.show()
-        
-        
 
     def save(self,fileName):
         position = self.position

@@ -5,6 +5,7 @@ Created on Mon Sep 15 10:44:32 2014
 @author: dzedzar
 """
 
+from pylab import *
 import numpy as np
 import matplotlib.pyplot as plt
 import pickle
@@ -75,6 +76,18 @@ class ActivityTrace (Trace):
              plt.plot(range(len(self.values)), toOutput[:,ii], '-')         
          plt.show()
 
+     def fromRateMap(self,ratemap,trajectory,dt=[]):
+         if isreal(dt):        
+             ttt = arange(trajectory.time[0],trajectory.time[-1],dt)
+         else:
+             ttt = trajectory.time
+         self.values = np.zeros((ratemap.topology[0],ttt.size))
+         for ii in range(len(ttt)):
+             self.values[:,ii] = ratemap.interpolate(trajectory.interpolate(ttt[ii]))             
+             
+         pass
+         
+         
 
 class SpikeTrace (Trace):
      def __init__(self,traceFunction=[]):
